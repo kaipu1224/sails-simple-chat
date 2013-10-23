@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%- title %></title>
+        <!-- Viewport mobile tag for sensible mobile support -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--STYLES-->
+        
+        <!--STYLES END-->
+    </head>
+
+    <body>
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <!-- auto include -->
+        <!--SCRIPTS-->
+        <script src="/linker/js/socket.io.js"></script>
+        <script src="/linker/js/sails.io.js"></script>
+        <script src="/linker/js/app.js"></script>
+        <!--SCRIPTS END-->
+
+        <!-- Include the view file for the current controller/route -->
+        <%- body %>
+    </body>
+</html>

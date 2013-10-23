@@ -1,0 +1,44 @@
+<div id="content">
+  <h3>Sails.js + Knockout.js Example</h3>
+
+  <form action="/home/search" >
+    <input type="text" data-bind="value:textItem">
+    <button data-bind="click: search">Send</button>
+    <ul data-bind="foreach: items">
+        <li><span data-bind="text:name"></span></li>
+    </ul>
+  </form>
+</div>
+
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+<script>
+$(function(){
+    var ViewModel = (function(){
+        function ViewModel(){
+            this.textItem = ko.observable();
+            this.items = ko.observableArray();
+        }
+        ViewModel.prototype.search = function(){
+            $.ajax({
+                context:this,
+                url:"/home/search",
+                data:{text1:this.textItem()},
+                success:function(data){
+                    var summary = this.items();
+                    if(!summary) summary = [];
+                    for(var i = 0; i < data.items.length; i++){
+                        summary.push(data.items[i]);
+                    }
+                    this.items(summary);
+                },
+                error:function(obj){
+                    console.log(obj);
+                }
+            });
+        }
+        return ViewModel;
+    })();
+
+    ko.applyBindings(new ViewModel());
+});
+</script>
